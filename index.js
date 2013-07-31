@@ -1,6 +1,6 @@
 "use strict";
 
-var Duplex = require('stream').Duplex,
+var Transform = require('readable-stream').Transform,
 	inherits = require('util').inherits,
 	qry = require('qry');
 
@@ -9,16 +9,14 @@ function QueryStream (query) {
 		return new QueryStream(query);
 	}
 
-	Duplex.call(this, { objectMode : true });
+	Transform.call(this, { objectMode : true });
 	this.match = qry(query);
 }
 
-inherits(QueryStream, Duplex);
+inherits(QueryStream, Transform);
 
-QueryStream.prototype._read = function () {};
-
-QueryStream.prototype._write = function (chunk, enc, next) {
-	if (chunk === null) { this.push({}); }
+QueryStream.prototype._transform = function (chunk, enc, next) {
+	if (typeof chunk === 'undefined' || chunk === null) { this.push({}); }
 
 	if (this.match(chunk)) {
 		this.push(chunk);

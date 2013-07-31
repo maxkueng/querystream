@@ -1,13 +1,14 @@
 {
   "name": "querystream",
-  "description": "",
+  "description": "A stream that allows filtering of data (objects) using MongoDB-compatible queries",
   "keywords": [
     "streams2",
-    "streams",
-	"objectMode",
-	"query",
-	"filter",
-	"mongodb"
+    "stream",
+    "objectMode",
+    "query",
+    "transform",
+    "filter",
+    "mongodb"
   ],
   "version": "0.0.1",
   "repository": {
@@ -16,10 +17,17 @@
   },
   "author": "Max Kueng <me@maxkueng.com> (http://maxkueng.com/)",
   "dependencies": {
-    "qry": "0.0.1"
+    "qry": "0.0.1",
+    "readable-stream": "~1.0.2"
+  },
+  "devDependencies": {
+    "tap": "~0.4.3"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
   },
   "engines": [
-    "node >=0.10.0"
+    "node >=0.8.0"
   ],
   "main": "./index",
   "licenses": [
