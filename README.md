@@ -1,10 +1,14 @@
 querystream
 ===========
 
-A streams2 duplex stream that filters incoming data based on
+[![Build Status](https://secure.travis-ci.org/maxkueng/querystream.png?branch=master)](http://travis-ci.org/maxkueng/querystream)
+
+A streams2 stream that filters incoming data based on
 MongoDB-compatible queries (using
 [qry](https://github.com/manuelstofer/qry)). Uses `objectMode = true`
 and only works with JavaScript objects.
+
+It's backwards compatible with old streams thanks to [readable-stream](https://github.com/isaacs/readable-stream).
 
 ## Example
 
