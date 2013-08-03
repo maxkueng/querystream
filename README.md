@@ -13,6 +13,13 @@ It's backwards compatible with old streams thanks to [readable-stream](https://g
 
 Create a new QueryStream `qs` (optionally use `new`) with the first argument being a MongoDB query and an optional second argument being a regular stream options object. Note that the `options.objectMode` property can not be changed and is always `true`.
 
+## Install
+
+```bash
+npm install querystream --save
+```
+or manually add it to your package.json
+
 ## Example
 
 Here's an example of using QueryStream to filter some data using a MongoDB query. Letting only data through which has an `x` property greater than 50.
