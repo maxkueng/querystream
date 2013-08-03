@@ -1,38 +1,9 @@
 var Writable = require('stream').Writable,
-	Duplex = require('stream').Duplex,
+	Readable = require('stream').Readable,
 	QueryStream = require('./index');
 
-
-var out1 = Writable({ objectMode : true });
-out1._write = function (chunk, enc, next) {
-//	console.log('o1', chunk);
-	next();
-};
-
-var out2 = Writable({ objectMode : true });
-out2._write = function (chunk, enc, next) {
-	console.log('o2', chunk);
-	next();
-};
-
-var meta = Duplex({ objectMode : true });
-meta._read = function () {};
-meta._write = function (chunk, enc, next) {
-	if (chunk === null) { this.push({}); }
-	this.push(chunk);
-	next();
-};
-
-var qs1 = QueryStream({
-	x : { $gt : 50 }
-});
-
-var qs2 = QueryStream({
-	x : { $lt : 50 }
-});
-
-
-var coords = [
+// Some sample data
+var sampleData = [
 	{ x : 10, y : 200 },
 	{ x : 20, y : 190 },
 	{ x : 30, y : 180 },
@@ -45,16 +16,29 @@ var coords = [
 	{ x : 100, y : 110 }
 ];
 
-var i = 0, len = coords.length;
+// Create a readable stream that provides the sample data
+var inputStream = new Readable({ objectMode : true });
+inputStream._read = function (size) {
+	sampleData.forEach(function(data) {
+		inputStream.push(data);
+	});
+	inputStream.push(null);
+};
 
-var interval = setInterval(function () {
-	if (i >= len) { return clearInterval(interval); }
-	meta.write(coords[i]);
-	i++;
-}, 100);
+// Create a writable stream that prints the data to the console
+var outputStream = new Writable({ objectMode : true });
+outputStream._write = function (chunk, encoding, next) {
+	console.log(chunk);
+	next();
+};
 
-meta.pipe(qs1);
-meta.pipe(qs2);
+// Create a new QueryStream that only emits data with 
+// an `x` property greater than 50
+var greater50Stream = new QueryStream({
+	x : { $gt : 50 }
+});
 
-qs1.pipe(out1);
-qs2.pipe(out2);
+// Pipe it all together
+inputStream
+	.pipe(greater50Stream)
+	.pipe(outputStream);
