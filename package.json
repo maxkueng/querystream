@@ -1,12 +1,13 @@
 {
   "name": "querystream",
-  "description": "A stream that allows filtering of data (objects) using MongoDB-compatible queries",
+  "description": "A stream that allows filtering of data (objects) using MongoDB-compatible queries.",
   "keywords": [
     "streams2",
     "stream",
     "objectMode",
     "query",
     "transform",
+    "through",
     "filter",
     "mongodb"
   ],
