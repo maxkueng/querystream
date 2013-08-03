@@ -11,7 +11,7 @@ It's backwards compatible with old streams thanks to [readable-stream](https://g
 
 ### var qs = QueryStream(query [, options])
 
-Create a new QueryStream `qs` (optionally use `new`) with the first argument being a MongoDB query and an optional second argument being a regular stream options object. Note that `options.objectMode` property can not be changed and ia always `true`.
+Create a new QueryStream `qs` (optionally use `new`) with the first argument being a MongoDB query and an optional second argument being a regular stream options object. Note that the `options.objectMode` property can not be changed and is always `true`.
 
 ## Example
 
