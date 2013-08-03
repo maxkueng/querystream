@@ -20,7 +20,7 @@ Here's an example of using QueryStream to filter some data using a MongoDB query
 ```javascript
 var Writable = require('stream').Writable,
 	Readable = require('stream').Readable,
-	QueryStream = require('./index');
+	QueryStream = require('querystream');
 
 // Some sample data
 var sampleData = [
